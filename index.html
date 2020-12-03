@@ -7,75 +7,69 @@
 <body>
   <div class="jumbotron">
     <div class="container">
-      <h3>データ容量変換アプリ</h3>
+      <h3>データ容量変換アプリ バイト演算(Byte operation)</h3>
     </div>
   </div>
 
   <div id="app">
     <div class="container">
       <div class="pb-2">
-        <label>変換するデータを入力してください。</label><br>
-        <input type="text" class="" placeholder="enter a message here..." v-model="text_data">
+        <input type="text" placeholder="変換するデータを入力してください。" v-model="input_data_size" size="50%">
+        <!-- <div class="error" v-if="error.noNumber">数値を入力してください。</div> -->
       </div>
 
       <div class="pb-2">
-        <div class="pb-2">
-          <label>変換するデータサイズを選択してください。</label><br>
-          <select v-model="select_data" class="">
-            <option value="1">バイト(B)</option>
-            <option value="2">キロバイト(KB)</option>
-            <option value="3">メガバイト(MB)</option>
-            <option value="4">ギガバイト(GB)</option>
-            <option value="5">テラバイト(TB)</option>
-            <option value="6">ペタバイド(PB)</option>
-            <option value="7">エクサバイト(EB)</option>
-            <option value="8">ゼタバイト(ZB)</option>
-            <option value="9">ヨタバイト(YB)</option>
-          </select>
-        </div>
-        <div class="pb-4">
-         <p>Selected item is {{ select_data }}.</p>
-        </div>
+        <label>変換元のデータサイズを選択してください。</label>
+        <select v-model="select_data_size" class="">
+          <option value="b">バイト(B)</option>
+          <option value="kb">キロバイト(KB)</option>
+          <option value="mb">メガバイト(MB)</option>
+          <option value="gb">ギガバイト(GB)</option>
+          <option value="tb">テラバイト(TB)</option>
+          <option value="pb">ペタバイド(PB)</option>
+          <option value="eb">エクサバイト(EB)</option>
+          <option value="zb">ゼタバイト(ZB)</option>
+          <option value="yb">ヨタバイト(YB)</option>
+        </select>
+
       </div>
 
       <div class="pb-2">
-        <button v-on:click="fizzbuzz1">計算</button>
-        <button v-on:click="fizzbuzz2">クリア</button>
-        <button v-on:click="fizzbuzz3">印刷</button>
-        <select v-model="select_data2" class="">
+        <button v-on:click="calc">計算</button>
+        <button v-on:click="clear">クリア</button>
+        <!-- <select v-model="select_data2" class="">
           <option value="0">6桁</option>
           <option value="1">10桁</option>
-          <option value="2">14</option>
-          <option value="3">18</option>
-          <option value="4">22</option>
-          <option value="5">26</option>
-          <option value="6">30</option>
-          <option value="7">34</option>
-          <option value="8">38</option>
-          <option value="9">42</option>
-          <option value="10">46</option>
-          <option value="11">50</option>
-        </select>
+          <option value="2">14桁</option>
+          <option value="3">18桁</option>
+          <option value="4">22桁</option>
+          <option value="5">26桁</option>
+          <option value="6">30桁</option>
+          <option value="7">34桁</option>
+          <option value="8">38桁</option>
+          <option value="9">42桁</option>
+          <option value="10">46桁</option>
+          <option value="11">50桁</option>
+        </select> -->
       </div>
       <hr>
-      <!-- 結果を出力 -->
       <div class="container">
-        バイト<input type="text" class="" v-model="text_data1">(B)<br>
-        キロバイト<input type="text" class="" v-model="text_data2">(KB)<br>
-        メガバイト<input type="text" class="" v-model="text_data3">(MB)<br>
-        ギガバイト<input type="text" class="" v-model="text_data4">(GB)<br>
-        テラバイト<input type="text" class="" v-model="text_data5">(TB)<br>
-        ペタバイド<input type="text" class="" v-model="text_data6">(PB)<br>
-        エクサバイト<input type="text" class="" v-model="text_data7">(EB)<br>
-        ゼタバイト<input type="text" class="" v-model="text_data8">(ZB)<br>
-        ヨタバイト<input type="text" class="" v-model="text_data9">(YB)<br>
+        <ol>バイト<input type="text" class="" v-model="text_data1">(B)</ol>
+        <ol>キロバイト<input type="text" class="" v-model="text_data2">(KB)</ol>
+        <ol>メガバイト<input type="text" class="" v-model="text_data3">(MB)</ol>
+        <ol>ギガバイト<input type="text" class="" v-model="text_data4">(GB)</ol>
+        <ol>テラバイト<input type="text" class="" v-model="text_data5">(TB)</ol>
+        <ol>ペタバイド<input type="text" class="" v-model="text_data6">(PB)</ol>
+        <ol>エクサバイト<input type="text" class="" v-model="text_data7">(EB)</ol>
+        <ol>ゼタバイト<input type="text" class="" v-model="text_data8">(ZB)</ol>
+        <ol>ヨタバイト<input type="text" class="" v-model="text_data9">(YB)</ol>
         <br>
         1K = 1024
       </div>
       <hr>
       <footer>
         <div class="container">
-          <p>Copyright &copy； 2020 Yoshiyuki Sugiyama All right reserves.</p>
+          <p>Copyright &copy; 2020 Yoshiyuki Sugiyama All right reserves.</p>
         </div>
       </footer>
     </div>

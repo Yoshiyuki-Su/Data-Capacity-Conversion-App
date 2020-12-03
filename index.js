@@ -3,30 +3,17 @@ var app = new Vue({
     data: {
       results: [],
       number: 0,
-      text_data: "",
-      select_data : "1",
-      select_data2 : "1"
+      input_data_size: "",
+      select_data_size : "b",
+      //select_data2 : "1"
     },
     methods: {
-      generateNumber() {
-        this.number = Math.floor(Math.random() * 1001)
+      calc: function(){
+        // まず値のチェックを実施する。
+        // select_data_sizeで選択されたデータサイズから各サイズへ変換し、その結果をテキストボックスに入力する。
       },
-      fizzbuzz() {
-        this.generateNumber();
-        this.results = [];
-        const num = this.number;
-        
-        for (let step = 0; step <= num; step++) {
-          if (step % 15 == 0) {
-            this.results.push('FizzBuzz')
-          } else if (step % 5 == 0) {
-            this.results.push('Buzz')
-          } else if (step % 3 == 0) {
-            this.results.push('Fizz')
-          } else {
-            this.results.push(step)
-          }
-        }
+      clear: function(){
+        this.input_data_size = ""
       }
     }
   })
