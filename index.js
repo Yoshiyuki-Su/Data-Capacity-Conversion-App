@@ -1,49 +1,43 @@
+const VeeValidate = window.VeeValidate;
+// フィールド監視
+const ValidationProvider = VeeValidate.ValidationProvider;
+// フォーム監視
+const ValidationObserver = VeeValidate.ValidationObserver;
+// バリデーションルール
+const VeeValidateRules = window.VeeValidateRules;
+
+const ja = {
+  "code": "ja",
+  "messages": {
+    //"regex": "{_field_}のフォーマットが正しくありません",
+    //"required": "{_field_}は必須項目です",
+    "regex": "変換するデータのフォーマットが正しくありません。数値からカンマ(,)区切りの数値のみ入力してください。",
+    "required": "変換するデータは必須項目です。",
+  }
+};
+
+for(let key in ja.messages) {
+  VeeValidate.extend(key, VeeValidateRules[key]);
+}
+
+VeeValidate.localize('ja', ja);
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 var app = new Vue({
     el: '#app',
     data: {
       input_data_size: "",
       select_data_size : "b",
-      error: {
-        require: false,
-        noNumber: false
-      }
     },
     methods: {
-      require(value){
-        this.error.require = (value.length < 1) ? true : false;
-      },
-      validationCheck(value){
-        require_result = this.require(value);
-
-        // エラーの場合は他のチェックをする前に返す
-        if (!require_result) return false
-
-        // TODO チェック内容
-        // ,区切りのデータも許容する予定
-        // 数値以外は弾く
-        
-        
-        return true
-      },
-        // input_size: function () {
-        //   this.error.noNumber = ((this.input_size.length < 1) && (isFinite(this.input_size))) ? true : false;
-        // }
       calc: function(){
-        // まず値のチェックを実施する。
-        result = this.validationCheck(this.input_data_size);
-
-        if (require_result){
-          // 計算処理を実行する
-          // select_data_sizeで選択されたデータサイズから各サイズへ変換し、その結果をテキストボックスに入力する。
-
-        }
-
-
-        
+        // 計算処理を実行する
+        // select_data_sizeで選択されたデータサイズから各サイズへ変換し、その結果をテキストボックスに入力する。
       },
       clear: function(){
         this.input_data_size = ""
       }
     }
   })
-  
