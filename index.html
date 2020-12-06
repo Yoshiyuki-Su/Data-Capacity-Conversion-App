@@ -15,12 +15,16 @@
     <div class="container">
       <div class="pb-2">
         <input type="text" placeholder="変換するデータを入力してください。" v-model="input_data_size" size="50%">
-        <!-- <div class="error" v-if="error.noNumber">数値を入力してください。</div> -->
+        <div class="error" v-if="error.noNumber">数値を入力してください。</div>
+        <div class="error" v-if="error.require">必須項目です。</div>
+        <!-- <div class="alert alert-danger" role="alert">
+          A simple danger alert—check it out!
+        </div> -->
       </div>
 
       <div class="pb-2">
         <label>変換元のデータサイズを選択してください。</label>
-        <select v-model="select_data_size" class="">
+        <select v-model="select_data_size">
           <option value="b">バイト(B)</option>
           <option value="kb">キロバイト(KB)</option>
           <option value="mb">メガバイト(MB)</option>
@@ -31,7 +35,6 @@
           <option value="zb">ゼタバイト(ZB)</option>
           <option value="yb">ヨタバイト(YB)</option>
         </select>
-
       </div>
 
       <div class="pb-2">
@@ -53,16 +56,17 @@
         </select> -->
       </div>
       <hr>
+      <!-- TODO テキストのサイズを考えておく -->
       <div class="container">
-        <ol>バイト<input type="text" class="" v-model="text_data1">(B)</ol>
-        <ol>キロバイト<input type="text" class="" v-model="text_data2">(KB)</ol>
-        <ol>メガバイト<input type="text" class="" v-model="text_data3">(MB)</ol>
-        <ol>ギガバイト<input type="text" class="" v-model="text_data4">(GB)</ol>
-        <ol>テラバイト<input type="text" class="" v-model="text_data5">(TB)</ol>
-        <ol>ペタバイド<input type="text" class="" v-model="text_data6">(PB)</ol>
-        <ol>エクサバイト<input type="text" class="" v-model="text_data7">(EB)</ol>
-        <ol>ゼタバイト<input type="text" class="" v-model="text_data8">(ZB)</ol>
-        <ol>ヨタバイト<input type="text" class="" v-model="text_data9">(YB)</ol>
+        <ol>バイト<input type="text" v-model="text_data1">(B)</ol>
+        <ol>キロバイト<input type="text" v-model="text_data2">(KB)</ol>
+        <ol>メガバイト<input type="text" v-model="text_data3">(MB)</ol>
+        <ol>ギガバイト<input type="text" v-model="text_data4">(GB)</ol>
+        <ol>テラバイト<input type="text" v-model="text_data5">(TB)</ol>
+        <ol>ペタバイド<input type="text" v-model="text_data6">(PB)</ol>
+        <ol>エクサバイト<input type="text" v-model="text_data7">(EB)</ol>
+        <ol>ゼタバイト<input type="text" v-model="text_data8">(ZB)</ol>
+        <ol>ヨタバイト<input type="text" v-model="text_data9">(YB)</ol>
         <br>
         1K = 1024
       </div>
