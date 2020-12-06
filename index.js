@@ -1,33 +1,43 @@
+const VeeValidate = window.VeeValidate;
+// フィールド監視
+const ValidationProvider = VeeValidate.ValidationProvider;
+// フォーム監視
+const ValidationObserver = VeeValidate.ValidationObserver;
+// バリデーションルール
+const VeeValidateRules = window.VeeValidateRules;
+
+const ja = {
+  "code": "ja",
+  "messages": {
+    //"regex": "{_field_}のフォーマットが正しくありません",
+    //"required": "{_field_}は必須項目です",
+    "regex": "変換するデータのフォーマットが正しくありません。数値からカンマ(,)区切りの数値のみ入力してください。",
+    "required": "変換するデータは必須項目です。",
+  }
+};
+
+for(let key in ja.messages) {
+  VeeValidate.extend(key, VeeValidateRules[key]);
+}
+
+VeeValidate.localize('ja', ja);
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 var app = new Vue({
     el: '#app',
     data: {
-      results: [],
-      number: 0,
-      text_data: "",
-      select_data : "1",
-      select_data2 : "1"
+      input_data_size: "",
+      select_data_size : "b",
     },
     methods: {
-      generateNumber() {
-        this.number = Math.floor(Math.random() * 1001)
+      calc: function(){
+        // 計算処理を実行する
+        // select_data_sizeで選択されたデータサイズから各サイズへ変換し、その結果をテキストボックスに入力する。
       },
-      fizzbuzz() {
-        this.generateNumber();
-        this.results = [];
-        const num = this.number;
-        
-        for (let step = 0; step <= num; step++) {
-          if (step % 15 == 0) {
-            this.results.push('FizzBuzz')
-          } else if (step % 5 == 0) {
-            this.results.push('Buzz')
-          } else if (step % 3 == 0) {
-            this.results.push('Fizz')
-          } else {
-            this.results.push(step)
-          }
-        }
+      clear: function(){
+        this.input_data_size = ""
       }
     }
   })
-  
