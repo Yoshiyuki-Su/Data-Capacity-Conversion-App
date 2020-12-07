@@ -35,35 +35,35 @@
       <div class="pb-2">
         <label>変換元のデータサイズを選択してください。</label>
         <select v-model="select_data_size">
-          <option value="b">バイト(B)</option>
-          <option value="kb">キロバイト(KB)</option>
-          <option value="mb">メガバイト(MB)</option>
-          <option value="gb">ギガバイト(GB)</option>
-          <option value="tb">テラバイト(TB)</option>
-          <option value="pb">ペタバイド(PB)</option>
-          <option value="eb">エクサバイト(EB)</option>
-          <option value="zb">ゼタバイト(ZB)</option>
-          <option value="yb">ヨタバイト(YB)</option>
+          <option value="Byte">バイト(B)</option>
+          <option value="KB">キロバイト(KB)</option>
+          <option value="MB">メガバイト(MB)</option>
+          <option value="GB">ギガバイト(GB)</option>
+          <option value="TB">テラバイト(TB)</option>
+          <option value="PB">ペタバイド(PB)</option>
+          <option value="EB">エクサバイト(EB)</option>
+          <option value="ZB">ゼタバイト(ZB)</option>
+          <option value="YB">ヨタバイト(YB)</option>
         </select>
       </div>
 
       <div class="pb-2">
         <button @click="calc">計算</button>
         <button @click="clear">クリア</button>
-        <!-- <select v-model="select_data2" class="">
-          <option value="0">6桁</option>
-          <option value="1">10桁</option>
-          <option value="2">14桁</option>
-          <option value="3">18桁</option>
-          <option value="4">22桁</option>
-          <option value="5">26桁</option>
-          <option value="6">30桁</option>
-          <option value="7">34桁</option>
-          <option value="8">38桁</option>
-          <option value="9">42桁</option>
-          <option value="10">46桁</option>
-          <option value="11">50桁</option>
-        </select> -->
+        <select v-model="select_data_digits">
+          <option value="6">6桁</option>
+          <option value="10">10桁</option>
+          <option value="14">14桁</option>
+          <option value="18">18桁</option>
+          <option value="22">22桁</option>
+          <option value="26">26桁</option>
+          <option value="30">30桁</option>
+          <option value="34">34桁</option>
+          <option value="38">38桁</option>
+          <option value="42">42桁</option>
+          <option value="46">46桁</option>
+          <option value="50">50桁</option>
+        </select>
       </div>
       <hr>
       <data-size
