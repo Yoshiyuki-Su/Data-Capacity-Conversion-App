@@ -5,6 +5,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vee-validate@3.2.3/dist/vee-validate.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/vee-validate@3.2.3/dist/rules.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-input-autowidth@1.0.10/dist/index.umd.min.js"></script>
 </head>
 <body>
   <div class="jumbotron">
@@ -21,7 +22,8 @@
             <label>変換するデータ</label>
             <validation-provider name="data_size" :rules="{ regex: /^[0-9]+(?:,[0-9]+)*$/ , required: true}">
               <div slot-scope="ProviderProps">
-                <input name="text" v-model="input_data_size" placeholder="変換するデータを入力してください。" size="50%">
+                <input name="text" v-model="input_data_size" placeholder="変換するデータを入力してください。"
+                v-autowidth="{maxWidth: '300px', minWidth: '10px', comfortZone: 0}"><br>
                 <span>  例：100、 123,456</span>
                 <p id="input_data_size_error_message" class="text-danger">{{ ProviderProps.errors[0] }}</p>
               </div>
@@ -64,20 +66,13 @@
         </select> -->
       </div>
       <hr>
-      <!-- TODO テキストのサイズを考えておく -->
-      <div class="container">
-        <ol>バイト<input type="text" v-model="text_data1">(B)</ol>
-        <ol>キロバイト<input type="text" v-model="text_data2">(KB)</ol>
-        <ol>メガバイト<input type="text" v-model="text_data3">(MB)</ol>
-        <ol>ギガバイト<input type="text" v-model="text_data4">(GB)</ol>
-        <ol>テラバイト<input type="text" v-model="text_data5">(TB)</ol>
-        <ol>ペタバイド<input type="text" v-model="text_data6">(PB)</ol>
-        <ol>エクサバイト<input type="text" v-model="text_data7">(EB)</ol>
-        <ol>ゼタバイト<input type="text" v-model="text_data8">(ZB)</ol>
-        <ol>ヨタバイト<input type="text" v-model="text_data9">(YB)</ol>
-        <br>
-        1K = 1024
-      </div>
+      <data-size
+        v-for="result in results"
+        v-bind:key="result.id"
+        v-bind:data="result">
+      </data-size>
+      <br>
+      <div class="container">1K = 1024</div>
       <hr>
       <footer>
         <div class="container">
