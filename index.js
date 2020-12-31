@@ -25,19 +25,122 @@ VeeValidate.localize('ja', ja);
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 
+const VueInputAutowidth = window['VueInputAutowidth'];
+Vue.use(VueInputAutowidth);
+
+var InputText = Vue.extend({
+  props: ['data'],
+  template: `
+  <div class="container">
+    <table>
+      <tr>
+        <td class="text-right"><ol>{{ data.size }}</ol></td>
+        <td><ol>
+            <input type="text" v-model="data.result_data"
+            v-autowidth="{maxWidth: '300px', minWidth: '50px', comfortZone: 0}">{{ data.unit }}</ol>
+        </td>
+      </tr>
+    </table>
+  </div>
+`
+})
+
+//  コンポーネントを登録
+Vue.component('data-size', InputText)
+
 var app = new Vue({
     el: '#app',
     data: {
       input_data_size: "",
-      select_data_size : "b",
+      select_data_size : "Byte",
+      select_data_digits: "10",
+      results: [
+        {
+          size: "バイト",
+          unit: "(B)",
+          result_data: "",
+        },
+        {
+          size: "キロバイト",
+          unit: "(KB)",
+          result_data: "",
+        },
+        {
+          size: "メガバイト",
+          unit: "(MB)",
+          result_data: "",
+        },
+        {
+          size: "ギガバイト",
+          unit: "(GB)",
+          result_data: "",
+        },
+        {
+          size: "テラバイト",
+          unit: "(TB)",
+          result_data: "",
+        },
+        {
+          size: "ペタバイド",
+          unit: "(PB)",
+          result_data: "",
+        },
+        {
+          size: "エクサバイト",
+          unit: "(EB)",
+          result_data: "",
+        },
+        {
+          size: "ゼタバイト",
+          unit: "(ZB)",
+          result_data: "",
+        },
+        {
+          size: "ヨタバイト",
+          unit: "(YB)",
+          result_data: "",
+        },
+      ]
     },
     methods: {
       calc: function(){
-        // 計算処理を実行する
-        // select_data_sizeで選択されたデータサイズから各サイズへ変換し、その結果をテキストボックスに入力する。
+        const kb = 1024
+        const mb = Math.pow(kb, 2)
+        const gb = Math.pow(kb, 3)
+        const tb = Math.pow(kb, 4)
+        const pb = Math.pow(kb, 5)
+        const eb = Math.pow(kb, 6)
+        const zb = Math.pow(kb, 7)
+        const yb = Math.pow(kb, 8)
+
+        // TODO this.input_data_size 現状全てbyteで入ってきている それを選択値のサイズから処理するよう変更する
+
+        this.results[0].result_data = this.byteFormat(this.input_data_size, 1, this.select_data_digits); // byte
+        this.results[1].result_data = this.byteFormat(this.input_data_size, kb, this.select_data_digits); // KB
+        this.results[2].result_data = this.byteFormat(this.input_data_size, mb, this.select_data_digits); // MB
+        this.results[3].result_data = this.byteFormat(this.input_data_size, gb, this.select_data_digits); // GB
+        this.results[4].result_data = this.byteFormat(this.input_data_size, tb, this.select_data_digits); // TB
+        this.results[5].result_data = this.byteFormat(this.input_data_size, pb, this.select_data_digits); // PB
+        this.results[6].result_data = this.byteFormat(this.input_data_size, eb, this.select_data_digits);  // EB
+        this.results[7].result_data = this.byteFormat(this.input_data_size, zb, this.select_data_digits); // ZB
+        this.results[8].result_data = this.byteFormat(this.input_data_size, yb, this.select_data_digits); // YB
       },
       clear: function(){
         this.input_data_size = ""
-      }
+      },
+      byteFormat: function(size, target, digits = 10) {
+        /**
+         * max digits桁 それに満たない場合は特に指数形式で表示しない
+         * @param {number} size 変換元データ
+         * @param {number} target データサイズ
+         * @param {String} [digits = 10] 小数点以下第n位まで求めるか digits以上は指数表記
+         * @return {*}
+         */
+        if (String(size / target).length <= 10) {
+          return (size / target);
+        } else {
+          return (size / target).toExponential(digits);
+        }
+      },
     }
   })
