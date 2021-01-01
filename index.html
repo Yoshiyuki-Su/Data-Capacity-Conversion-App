@@ -23,7 +23,7 @@
             <validation-provider name="data_size" :rules="{ regex: /^[0-9]+(?:,[0-9]+)*$/ , required: true}">
               <div slot-scope="ProviderProps">
                 <input name="text" v-model="input_data_size" placeholder="変換するデータを入力してください。"
-                v-autowidth="{maxWidth: '300px', minWidth: '10px', comfortZone: 0}"><br>
+                  v-autowidth="{maxWidth: '300px', minWidth: '10px', comfortZone: 0}"><br>
                 <span>  例：100、 123,456</span>
                 <p id="input_data_size_error_message" class="text-danger">{{ ProviderProps.errors[0] }}</p>
               </div>
@@ -76,7 +76,7 @@
       <hr>
       <footer>
         <div class="container">
-          <p>Copyright &copy; 2020 Yoshiyuki Sugiyama All right reserves.</p>
+          <p>Copyright &copy; 2020-2021 Yoshiyuki Sugiyama All right reserves.</p>
         </div>
       </footer>
     </div>
