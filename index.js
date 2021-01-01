@@ -6,6 +6,16 @@ const ValidationObserver = VeeValidate.ValidationObserver;
 // バリデーションルール
 const VeeValidateRules = window.VeeValidateRules;
 
+// データサイズ
+const kb = 1024
+const mb = Math.pow(kb, 2)
+const gb = Math.pow(kb, 3)
+const tb = Math.pow(kb, 4)
+const pb = Math.pow(kb, 5)
+const eb = Math.pow(kb, 6)
+const zb = Math.pow(kb, 7)
+const yb = Math.pow(kb, 8)
+
 const ja = {
   "code": "ja",
   "messages": {
@@ -104,38 +114,41 @@ var app = new Vue({
     },
     methods: {
       calc: function(){
-        const kb = 1024
-        const mb = Math.pow(kb, 2)
-        const gb = Math.pow(kb, 3)
-        const tb = Math.pow(kb, 4)
-        const pb = Math.pow(kb, 5)
-        const eb = Math.pow(kb, 6)
-        const zb = Math.pow(kb, 7)
-        const yb = Math.pow(kb, 8)
-
         // TODO this.input_data_size 現状全てbyteで入ってきている それを選択値のサイズから処理するよう変更する
 
-        this.results[0].result_data = this.byteFormat(this.input_data_size, 1, this.select_data_digits); // byte
-        this.results[1].result_data = this.byteFormat(this.input_data_size, kb, this.select_data_digits); // KB
-        this.results[2].result_data = this.byteFormat(this.input_data_size, mb, this.select_data_digits); // MB
-        this.results[3].result_data = this.byteFormat(this.input_data_size, gb, this.select_data_digits); // GB
-        this.results[4].result_data = this.byteFormat(this.input_data_size, tb, this.select_data_digits); // TB
-        this.results[5].result_data = this.byteFormat(this.input_data_size, pb, this.select_data_digits); // PB
-        this.results[6].result_data = this.byteFormat(this.input_data_size, eb, this.select_data_digits);  // EB
-        this.results[7].result_data = this.byteFormat(this.input_data_size, zb, this.select_data_digits); // ZB
-        this.results[8].result_data = this.byteFormat(this.input_data_size, yb, this.select_data_digits); // YB
+        // 入力値にカンマが含まれている場合は削除する
+        var input_data = this.removeComma(this.input_data_size);
+
+        // 計算し、結果を入力する
+        this.results[0].result_data = this.byteFormat(input_data, 1, this.select_data_digits); // byte
+        this.results[1].result_data = this.byteFormat(input_data, kb, this.select_data_digits); // KB
+        this.results[2].result_data = this.byteFormat(input_data, mb, this.select_data_digits); // MB
+        this.results[3].result_data = this.byteFormat(input_data, gb, this.select_data_digits); // GB
+        this.results[4].result_data = this.byteFormat(input_data, tb, this.select_data_digits); // TB
+        this.results[5].result_data = this.byteFormat(input_data, pb, this.select_data_digits); // PB
+        this.results[6].result_data = this.byteFormat(input_data, eb, this.select_data_digits);  // EB
+        this.results[7].result_data = this.byteFormat(input_data, zb, this.select_data_digits); // ZB
+        this.results[8].result_data = this.byteFormat(input_data, yb, this.select_data_digits); // YB
       },
       clear: function(){
         this.input_data_size = ""
       },
+      /**
+      * 入力値にカンマが含まれていた場合は削除する
+      * @param {String} input_data 入力値
+      * @return {*}
+      */
+      removeComma: function(input_data){
+        return parseInt(input_data.replace(/,/g, ''), 10);
+      },
+      /**
+      * max digits桁 それに満たない場合は特に指数形式で表示しない
+      * @param {number} size 変換元データ
+      * @param {number} target データサイズ
+      * @param {String} [digits = 10] 小数点以下第n位まで求めるか digits以上は指数表記
+      * @return {*}
+      */
       byteFormat: function(size, target, digits = 10) {
-        /**
-         * max digits桁 それに満たない場合は特に指数形式で表示しない
-         * @param {number} size 変換元データ
-         * @param {number} target データサイズ
-         * @param {String} [digits = 10] 小数点以下第n位まで求めるか digits以上は指数表記
-         * @return {*}
-         */
         if (String(size / target).length <= 10) {
           return (size / target);
         } else {
