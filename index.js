@@ -114,8 +114,6 @@ var app = new Vue({
     },
     methods: {
       calc: function(){
-        // TODO this.input_data_size 現状全てbyteで入ってきている それを選択値のサイズから処理するよう変更する
-
         // 入力値にカンマが含まれている場合は削除する
         var input_data = this.removeComma(this.input_data_size);
 
@@ -132,6 +130,11 @@ var app = new Vue({
       },
       clear: function(){
         this.input_data_size = ""
+      },
+      all_clear: function() {
+        for (var i = 0; i <= 8; i++){
+          this.results[i].result_data = ""
+        }
       },
       /**
       * 入力値にカンマが含まれていた場合は削除する
@@ -154,6 +157,6 @@ var app = new Vue({
         } else {
           return (size / target).toExponential(digits);
         }
-      },
+      }
     }
   })
